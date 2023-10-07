@@ -26,7 +26,7 @@ fun main() { // Executes main thread
     }
     println("Main Program ends : ${Thread.currentThread().name}")
 
-    /* The difference between the launch coroutine and "runBlocking" coroutine is
+    /* The difference between the launch coroutine Builder and "runBlocking" coroutine Builder is
        "launch" -> doesn't block the background thread
        "runBlocking" -> blocks the thread on which it is working
     */
