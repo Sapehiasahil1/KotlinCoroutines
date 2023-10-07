@@ -1,13 +1,12 @@
-import kotlinx.coroutines.Job
-import kotlinx.coroutines.delay
-import kotlinx.coroutines.launch
-import kotlinx.coroutines.runBlocking
+import kotlinx.coroutines.*
 
 /*
     Coroutine Builders -> They create the coroutines
 
     1. launch : It is also called "FIRE AND FORGET" meaning when launch is called a new coroutine is
-        created and it will not return anything to its caller.
+        created, and it will not return anything to its caller.
+
+        -> It returns Job object.
 
     Diff b/w launch and GlobalScope.launch ?
         ## launch -> It has a local scope which means that the coroutine will destroy as soon as the component
@@ -20,7 +19,8 @@ import kotlinx.coroutines.runBlocking
         eg :- file download etc.
 
     2. runBlocking
-    3. async
+    3. async : It is more similar to launch. [async and GlobalScope.async]
+        -> It returns DeferredJob<T> object.
 */
 
 fun main() = runBlocking {
@@ -35,6 +35,21 @@ fun main() = runBlocking {
     }
 
     job.join() // wait for the coroutine to complete the task.
+    //delay(2000)
+    println("Main program ends: ${Thread.currentThread().name}") // Thread : Main
+
+    //-----------------------------------------------------------------------------------------
+
+    println("Main program starts : ${Thread.currentThread().name}")
+
+    val defferedJob : Deferred<Unit> = async {// Thread : Main
+        println("Fake work starts : ${Thread.currentThread().name}") // Thread : Main
+        delay(1000) // Coroutine is suspended and main thread is free (not blocked)
+        println("Fake work ends : ${Thread.currentThread().name}") // Thread : Main or different thread
+
+    }
+
+    defferedJob.join() // wait for the coroutine to complete the task.
     //delay(2000)
     println("Main program ends: ${Thread.currentThread().name}") // Thread : Main
 }
