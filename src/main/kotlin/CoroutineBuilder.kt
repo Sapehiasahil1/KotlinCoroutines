@@ -7,6 +7,7 @@ import kotlinx.coroutines.*
         created, and it will not return anything to its caller.
 
         -> It returns Job object.
+        -> It doesn't block the thread.
 
     Diff b/w launch and GlobalScope.launch ?
         ## launch -> It has a local scope which means that the coroutine will destroy as soon as the component
@@ -19,8 +20,12 @@ import kotlinx.coroutines.*
         eg :- file download etc.
 
     2. runBlocking
+        -> IT blocks the thread.
+
     3. async : It is more similar to launch. [async and GlobalScope.async]
+
         -> It returns DeferredJob<T> object.
+        -> It doesn't block the thread.
 */
 
 fun main() = runBlocking {
