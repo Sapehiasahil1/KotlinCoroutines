@@ -51,7 +51,7 @@ fun main() = runBlocking{
 */
 
 // Lazy Execution
-fun main() = runBlocking {
+fun abc() = runBlocking {
 
     println("Main program starts:${Thread.currentThread().name}")
 
